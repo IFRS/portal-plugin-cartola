@@ -1,7 +1,7 @@
 <?php
 defined('ABSPATH') or die('No script kiddies please!');
 /*
-Plugin Name: IFRS Portal Plugin Cartola
+Plugin Name: IFRS Portal Cartola
 Plugin URI:  https://github.com/IFRS/portal-plugin-cartola
 Description: Plugin para definir seleção única das categorias de um post (cartola).
 Version:     1.0.0
