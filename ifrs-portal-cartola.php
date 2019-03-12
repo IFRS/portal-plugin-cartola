@@ -4,7 +4,7 @@ defined('ABSPATH') or die('No script kiddies please!');
 Plugin Name: IFRS Portal Cartola
 Plugin URI:  https://github.com/IFRS/portal-plugin-cartola
 Description: Plugin para definir seleção única das categorias de um post (cartola).
-Version:     1.0.0
+Version:     1.1.0
 Author:      Ricardo Moro
 Author URI:  https://github.com/ricardomoro
 License:     GPL3
