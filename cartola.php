@@ -1,9 +1,29 @@
 <?php
-// Single Term
-$single_term_category = new Taxonomy_Single_Term( 'category' );
-$single_term_category->set( 'priority', 'default' );
-// $single_term_category->set( 'context', 'normal' );
-$single_term_category->set( 'metabox_title', __( 'Cartola', 'ifrs-portal-plugin-cartola' ) );
-$single_term_category->set( 'force_selection', true );
-$single_term_category->set( 'indented', true );
-$single_term_category->set( 'allow_new_terms', false );
+function cartola_metaboxes() {
+    $prefix = '_cartola_';
+
+    /**
+	 * Category
+	 */
+    $cartola_metabox = new_cmb2_box( array(
+		'id'           => 'category_taxonomy_metabox',
+		'title'        => __( 'Cartola', 'ifrs-portal-plugin-cartola' ),
+		'object_types' => array( 'post' ),
+		'context'      => 'side',
+		'priority'     => 'low',
+		'show_names'   => false,
+    ) );
+
+    $cartola_metabox->add_field( array(
+        'id'                => $prefix . 'category_taxonomy',
+        'name'              => __( 'Cartola', 'ifrs-portal-plugin-cartola' ),
+        'desc'              => __( 'Escolha a categoria da notícia.', 'ifrs-portal-plugin-cartola' ),
+        'taxonomy'          => 'category',
+        'type'              => 'taxonomy_radio',
+        'show_option_none'  => false,
+        'text'              => array(
+            'no_terms_text' => __( 'Ops! Nenhuma categoria cadastrada.', 'ifrs-portal-plugin-cartola')
+        ),
+        'remove_default'    => 'true',
+    ) );
+}
