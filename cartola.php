@@ -10,7 +10,7 @@ function cartola_metaboxes() {
 		'title'        => __( 'Cartola', 'ifrs-portal-plugin-cartola' ),
 		'object_types' => array( 'post' ),
 		'context'      => 'side',
-		'priority'     => 'low',
+		'priority'     => 'default',
 		'show_names'   => false,
     ) );
 
@@ -27,3 +27,5 @@ function cartola_metaboxes() {
         'remove_default'    => 'true',
     ) );
 }
+
+add_action('cmb2_admin_init', 'cartola_metaboxes');
