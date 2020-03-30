@@ -1,31 +1,38 @@
 <?php
-function cartola_metaboxes() {
-    $prefix = '_cartola_';
-
+add_filter('rwmb_meta_boxes', function($metaboxes) {
     /**
 	 * Category
 	 */
-    $cartola_metabox = new_cmb2_box( array(
-		'id'           => 'category_taxonomy_metabox',
-		'title'        => __( 'Cartola', 'ifrs-portal-plugin-cartola' ),
-		'object_types' => array( 'post' ),
-		'context'      => 'side',
-		'priority'     => 'default',
-		'show_names'   => false,
-    ) );
-
-    $cartola_metabox->add_field( array(
-        'id'                => $prefix . 'category_taxonomy',
-        'name'              => __( 'Cartola', 'ifrs-portal-plugin-cartola' ),
-        'desc'              => __( 'Escolha a categoria da notícia.', 'ifrs-portal-plugin-cartola' ),
-        'taxonomy'          => 'category',
-        'type'              => 'taxonomy_radio',
-        'show_option_none'  => false,
-        'text'              => array(
-            'no_terms_text' => __( 'Ops! Nenhuma categoria cadastrada.', 'ifrs-portal-plugin-cartola')
+    $metaboxes[] = array(
+        'title'      => __( 'Cartola', 'ifrs-portal-plugin-cartola' ),
+        'context'    => 'side',
+        'priority'   => 'low',
+        'post_types' => 'post',
+        'fields'     => array(
+            array(
+                'id'             => '_cartola_category_taxonomy',
+                'type'           => 'taxonomy',
+                'taxonomy'       => 'category',
+                'std'            => get_option('default_category'),
+                'add_new'        => false,
+                'remove_default' => true,
+                'field_type'     => 'radio_list',
+                'inline'         => false,
+            )
         ),
-        'remove_default'    => 'true',
-    ) );
-}
+        'validation' => array(
+            'rules'  => array(
+                '_cartola_category_taxonomy' => array(
+                    'required'  => true,
+                ),
+            ),
+            'messages' => array(
+                '_cartola_category_taxonomy' => array(
+                    'required'  => __( 'Selecione uma Cartola.', 'ifrs-portal-plugin-cartola' ),
+                ),
+            ),
+        ),
+    );
 
-add_action('cmb2_admin_init', 'cartola_metaboxes');
+    return $metaboxes;
+}, 10);
